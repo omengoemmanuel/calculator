@@ -22,6 +22,12 @@ def function(request):
         elif operands == "subtract":
             result = float(fno) - float(lno)
             return render(request, 'calculate.html', {'result': result})
+        elif operands == 'product':
+            result = float(fno) * float(lno)
+            return render(request, 'calculate.html', {'result': result})
+        elif operands == "divide":
+            result = float(fno) / float(lno)
+            return render(request, 'calculate.html', {'result': result})
 
         math = fun(fno=fno, lno=lno, operands=operands)
         math.save()

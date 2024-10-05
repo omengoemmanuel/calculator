@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.urls import path
 
 from calculator.models import fun
+import math
 
 
 # Create your views here.
@@ -28,8 +29,11 @@ def function(request):
         elif operands == "divide":
             result = float(fno) / float(lno)
             return render(request, 'calculate.html', {'result': result})
+        elif operands == 'cos':
+            result = math.cos(float(fno))
+            return render(request, 'calculate.html', {'result': result})
 
-        math = fun(fno=fno, lno=lno, operands=operands)
-        math.save()
+        math1 = fun(fno=fno, lno=lno, operands=operands)
+        math1.save()
         return redirect('cal1')
     return redirect('cal1')

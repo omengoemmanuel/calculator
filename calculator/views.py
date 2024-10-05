@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.urls import path
 
-from calculator.models import fun
+from calculator.models import fun, invest
 import math
 
 
@@ -37,3 +37,20 @@ def function(request):
         math1.save()
         return redirect('cal1')
     return redirect('cal1')
+
+
+def investment(request):
+    return render(request, 'investment.html')
+
+
+def invest_sub(request):
+    if request.method == "POST":
+        start_amount = request.POST.get('start_amount')
+        no_yor = request.POST.get('no_yor')
+        rate = request.POST.get('rate')
+        add_cont = request.POST.get('add_cont')
+
+        invests = invest(start_amount=start_amount, no_yor=no_yor, rate=rate, add_cont=add_cont)
+        invests.save()
+        return redirect('investment')
+    return redirect('investment')

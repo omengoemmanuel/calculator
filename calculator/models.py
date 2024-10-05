@@ -9,3 +9,12 @@ class fun(models.Model):
 
     def __str__(self):
         return self.operands
+
+
+class invest(models.Model):
+    start_amount = models.DecimalField(max_digits=6, decimal_places=2)
+    no_yor = models.PositiveIntegerField()
+    rate = models.PositiveIntegerField()
+    add_cont = models.DecimalField(max_digits=6, decimal_places=2)
+
+

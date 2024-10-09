@@ -45,12 +45,24 @@ def investment(request):
 
 def invest_sub(request):
     if request.method == "POST":
-        start_amount = request.POST.get('start_amount')
-        no_yor = request.POST.get('no_yor')
-        rate = request.POST.get('rate')
-        add_cont = request.POST.get('add_cont')
+        start_amount = float(request.POST.get('start_amount'))
+        no_yor = int(request.POST.get('no_yor'))
+        rate = float(request.POST.get('rate')) / 100
+        add_cont = float(request.POST.get('add_cont'))
+
+        result = []
+        for year in range(1, no_yor + 1):
+            amount = (start_amount * (1 + rate) ** no_yor) + add_cont
+            result.append({
+                'year': year,
+                'amount': round(amount, 2)
+            })
 
         invests = invest(start_amount=start_amount, no_yor=no_yor, rate=rate, add_cont=add_cont)
         invests.save()
-        return redirect('investment')
-    return redirect('investment')
+    return render(request, 'report.html',
+                  {'result': result, 'start_amount': start_amount, 'rate': rate * 100, 'no_yor': no_yor})
+
+
+def report(request):
+    return render(request, 'report.html')

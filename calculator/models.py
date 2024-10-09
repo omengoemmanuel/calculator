@@ -14,7 +14,7 @@ class fun(models.Model):
 class invest(models.Model):
     start_amount = models.DecimalField(max_digits=6, decimal_places=2)
     no_yor = models.PositiveIntegerField()
-    rate = models.PositiveIntegerField()
+    rate = models.DecimalField(max_digits=3, decimal_places=3)
     add_cont = models.DecimalField(max_digits=6, decimal_places=2)
 
 
